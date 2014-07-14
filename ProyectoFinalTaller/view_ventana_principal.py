@@ -17,6 +17,7 @@ class Form(QtGui.QWidget):
         self.render_table2()
         self.cargar_categorias()
         self.cargar_recetas()
+        self.ventana.lineEdit.textChanged[str].connect(self.filtro)
         self.ventana.tabla_recetas.clicked.connect(self.infoRecetas)
         self.ventana.nueva_categoria.clicked.connect(self.nueva_cate)
         self.ventana.editar_categoria.clicked.connect(self.editar_cate)
@@ -31,6 +32,10 @@ class Form(QtGui.QWidget):
         self.ventana.tabla_categorias.setFixedWidth(600)
         self.ventana.tabla_categorias.setFixedHeight(200)
 
+    def filtro(self, txt):
+        texto = txt.encode('utf8')
+        products = controller.filtrarProductos(txt)
+        self.cargar_receta_filtro(products)
 
     def editar_cate(self):
         model = self.ventana.tabla_categorias.model()
@@ -145,6 +150,42 @@ class Form(QtGui.QWidget):
         self.ventana.tabla_categorias.setColumnWidth(3, 800)
 
 
+
+
+    def cargarar_receta_filtro(self, productos):
+        self.model = QtGui.QStandardItemModel(len(productos), 7)
+        self.model.setHorizontalHeaderItem(0, QtGui.QStandardItem(u"id"))
+        self.model.setHorizontalHeaderItem(1, QtGui.QStandardItem(u"Nombre"))
+        self.model.setHorizontalHeaderItem(2, QtGui.QStandardItem(u"id categoria"))
+        self.model.setHorizontalHeaderItem(3, QtGui.QStandardItem(u"Descripción"))
+        self.model.setHorizontalHeaderItem(4, QtGui.QStandardItem(u"Ingredientes"))
+        self.model.setHorizontalHeaderItem(5, QtGui.QStandardItem(u"Preparación"))
+        self.model.setHorizontalHeaderItem(6, QtGui.QStandardItem(u"País"))
+        r = 0
+        for row in productos:
+            index = self.model.index(r, 0, QtCore.QModelIndex())
+            self.model.setData(index, row['id_receta'])
+            index = self.model.index(r, 1, QtCore.QModelIndex())
+            self.model.setData(index, row['nombre'])
+            index = self.model.index(r, 2, QtCore.QModelIndex())
+            self.model.setData(index, row['fk_id_categoria'])
+            index = self.model.index(r, 3, QtCore.QModelIndex())
+            self.model.setData(index, row['descripcion'])
+            index = self.model.index(r, 4, QtCore.QModelIndex())
+            self.model.setData(index, row['ingredientes'])
+            index = self.model.index(r, 5, QtCore.QModelIndex())
+            self.model.setData(index, row['preparacion'])
+            index = self.model.index(r, 6, QtCore.QModelIndex())
+            self.model.setData(index, row['fk_id_pais'])
+            r = r + 1
+        self.ventana.tabla_recetas.setModel(self.model)
+        self.ventana.tabla_recetas.setColumnWidth(0, 80)
+        self.ventana.tabla_recetas.setColumnWidth(1, 150)
+        self.ventana.tabla_recetas.setColumnWidth(2, 80)
+        self.ventana.tabla_recetas.setColumnWidth(3, 100)
+        self.ventana.tabla_recetas.setColumnWidth(4, 800)
+        self.ventana.tabla_recetas.setColumnWidth(5, 800)
+        self.ventana.tabla_recetas.setColumnWidth(6, 100)
 
     def infoRecetas(self):
         model = self.ventana.tabla_recetas.model()

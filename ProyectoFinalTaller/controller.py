@@ -83,6 +83,14 @@ def insertarproductos(datos):
     con.commit()
 
 
+def filtrarProductos(texto):
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT * FROM recetas WHERE nombre LIKE \"%{0}%\"".format(texto)
+    resultado = c.execute(query)
+    producto = resultado.fetchall()
+    con.close()
+    return producto
 
 
 def infoFila2(codigo):
