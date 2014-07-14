@@ -1,103 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>ventana_nuevacategoria</class>
+ <widget class="QDialog" name="ventana_nuevacategoria">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>549</width>
-    <height>335</height>
+    <width>547</width>
+    <height>325</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Nueva categoría</string>
+   <string>ventana_nuevacategoria</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="btn_aceptar">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>230</y>
-      <width>98</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Aceptar</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_cancelar">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>230</y>
-      <width>98</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Cancelar</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="nombre_categoria">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>40</y>
-      <width>361</width>
-      <height>27</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>40</y>
-      <width>66</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Nombre:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>110</y>
-      <width>91</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Descripción:</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="descripcion_categoria">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>110</y>
-      <width>381</width>
-      <height>101</height>
-     </rect>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QPushButton" name="btn_cancelar">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>549</width>
-     <height>25</height>
+     <x>280</x>
+     <y>240</y>
+     <width>98</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancelar</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="descripcion_categoria">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>120</y>
+     <width>381</width>
+     <height>101</height>
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QPushButton" name="btn_aceptar">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>240</y>
+     <width>98</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Aceptar</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>120</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Descripción:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>70</y>
+     <width>66</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Nombre:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="nombre_categoria">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>70</y>
+     <width>361</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>30</y>
+     <width>66</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>id:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="id_categoria">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>20</y>
+     <width>361</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
