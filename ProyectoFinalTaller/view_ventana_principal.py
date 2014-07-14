@@ -17,7 +17,6 @@ class Form(QtGui.QWidget):
         self.render_table2()
         self.cargar_categorias()
         self.cargar_recetas()
-        self.ventana.lineEdit.textChanged[str].connect(self.filtro)
         self.ventana.tabla_recetas.clicked.connect(self.infoRecetas)
         self.ventana.nueva_categoria.clicked.connect(self.nueva_cate)
         self.ventana.editar_categoria.clicked.connect(self.editar_cate)
@@ -32,10 +31,6 @@ class Form(QtGui.QWidget):
         self.ventana.tabla_categorias.setFixedWidth(600)
         self.ventana.tabla_categorias.setFixedHeight(200)
 
-    def filtro(self, txt):
-        texto = txt.encode('utf8')
-        products = controller.filtrarProductos(txt)
-        self.cargar_receta_filtro(products)
 
     def editar_cate(self):
         model = self.ventana.tabla_categorias.model()
@@ -133,6 +128,7 @@ class Form(QtGui.QWidget):
 
         r = 0
         for row in categorias:
+            cantidad = controller.contador(row[0])
             index = self.model.index(r, 0, QtCore.QModelIndex())
             self.model.setData(index, row['id_categoria'])
             index = self.model.index(r, 1, QtCore.QModelIndex())
@@ -140,7 +136,7 @@ class Form(QtGui.QWidget):
             index = self.model.index(r, 3, QtCore.QModelIndex())
             self.model.setData(index, row['descripcion'])
             index = self.model.index(r, 2, QtCore.QModelIndex())
-            self.model.setData(index, "numrecetas")
+            self.model.setData(index, cantidad)
             r = r + 1
         self.ventana.tabla_categorias.setModel(self.model)
         self.ventana.tabla_categorias.setColumnWidth(0, 100)
@@ -150,6 +146,7 @@ class Form(QtGui.QWidget):
 
 
 
+<<<<<<< HEAD
 
     def cargara_receta_filtro(self, productos):
         self.model = QtGui.QStandardItemModel(len(productos), 7)
@@ -186,6 +183,8 @@ class Form(QtGui.QWidget):
         self.ventana.tabla_recetas.setColumnWidth(5, 800)
         self.ventana.tabla_recetas.setColumnWidth(6, 100)
 
+=======
+>>>>>>> b485d9899cc85a48680a8302a6bb741d0b0b746b
     def infoRecetas(self):
         model = self.ventana.tabla_recetas.model()
         index = self.ventana.tabla_recetas.currentIndex()
