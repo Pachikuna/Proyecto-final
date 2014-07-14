@@ -132,7 +132,23 @@ class Form(QtGui.QWidget):
         self.ventana.tabla_categorias.setColumnWidth(1, 100)
         self.ventana.tabla_categorias.setColumnWidth(2, 800)
 
+    def infoMovies(self):
+        model = self.ui.tableView.model()
+        index = self.ui.tableView.currentIndex()
+        codigo = model.index(index.row(), 3, QtCore.QModelIndex()).data()
+        valores = controller.infoFila2(codigo)
 
+        self.ui.titulo.setText(valores[1])
+        ficheros = os.listdir('Img/')
+        fichero = valores[6] in ficheros
+        if fichero is True:
+            direccion = 'Img/{0}'.format(valores[6])
+            self.ui.setImageLabel(direccion)
+        else:
+            fichero = valores[6] + ".png" in ficheros
+            if fichero is True:
+                direccion = 'Img/{0}'.format(valores[6])
+                self.ui.setImageLabel(direccion)
 
 
 def run():

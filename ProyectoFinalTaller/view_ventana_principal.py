@@ -132,7 +132,7 @@ class Form(QtGui.QWidget):
         self.ventana.tabla_categorias.setColumnWidth(1, 100)
         self.ventana.tabla_categorias.setColumnWidth(2, 800)
 
-    def infoMovies(self):
+    def infoRecetas(self):
         model = self.ui.tableView.model()
         index = self.ui.tableView.currentIndex()
         codigo = model.index(index.row(), 3, QtCore.QModelIndex()).data()

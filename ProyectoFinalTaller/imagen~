@@ -39,17 +39,17 @@ def infoMovies(self):
         index = self.ui.tableView.currentIndex()
         codigo = model.index(index.row(), 3, QtCore.QModelIndex()).data()
         valores = controller.infoFila2(codigo)
+
         self.ui.titulo.setText(valores[1])
-        self.ui.descripcion.setText(valores[7])
         ficheros = os.listdir('Img/')
-        fichero = valores[2] in ficheros
+        fichero = valores[6] in ficheros
         if fichero is True:
-            direccion = 'Img/{0}'.format(valores[2])
+            direccion = 'Img/{0}'.format(valores[6])
             self.ui.setImageLabel(direccion)
         else:
-            fichero = valores[2] + ".png" in ficheros
+            fichero = valores[6] + ".png" in ficheros
             if fichero is True:
-                direccion = 'Img/{0}'.format(valores[2])
+                direccion = 'Img/{0}'.format(valores[6])
                 self.ui.setImageLabel(direccion)
 
 

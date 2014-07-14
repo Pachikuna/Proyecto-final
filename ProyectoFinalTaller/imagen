@@ -17,19 +17,19 @@ def infoFila2(codigo):
     @return valores"""
     con = conectar()
     c = con.cursor()
-    query = "SELECT * FROM movies WHERE id=?"
+    query = "SELECT * FROM recetas WHERE id=?"
     resultado = c.execute(query, [codigo])
     infoFila = resultado.fetchall()
     con.close()
     for row in infoFila:
-        valores = [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7],row[8]]
+        valores = [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]]
     return valores
 
 
 
 main:
 
-self.ui.tableView.clicked.connect(self.infoMovies)
+self.ui.tableView.clicked.connect(self.infoRecetas)
 
 
 
