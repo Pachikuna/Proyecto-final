@@ -135,7 +135,7 @@ class Form(QtGui.QWidget):
             index = self.model.index(r, 3, QtCore.QModelIndex())
             self.model.setData(index, row['descripcion'])
             index = self.model.index(r, 2, QtCore.QModelIndex())
-            self.model.setData(index, "numrecetas"")
+            self.model.setData(index, "numrecetas")
             r = r + 1
         self.ventana.tabla_categorias.setModel(self.model)
         self.ventana.tabla_categorias.setColumnWidth(0, 100)
