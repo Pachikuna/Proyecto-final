@@ -26,7 +26,7 @@ class Login(QtGui.QWidget):
         self.lis = controller_usuarios.busca_usuario(self.uiL.nombreu.text().strip(),
                     self.uiL.contrase.text())
         if(len(self.lis) == 1):
-            self.Nueva = Main()
+            self.Nueva = Form()
             self.close()
         else:
             self.errorMessageDialog = QtGui.QErrorMessage(self)
