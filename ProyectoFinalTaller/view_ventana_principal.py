@@ -115,7 +115,9 @@ class Form(QtGui.QWidget):
         self.model = QtGui.QStandardItemModel(len(categorias), 3)
         self.model.setHorizontalHeaderItem(0, QtGui.QStandardItem(u"id"))
         self.model.setHorizontalHeaderItem(1, QtGui.QStandardItem(u"Nombre"))
-        self.model.setHorizontalHeaderItem(2, QtGui.QStandardItem(u"Descripción"))
+#        self.model.setHorizontalHeaderItem(2, QtGui.QStandardItem(u"Cantidad de recetas"))
+        self.model.setHorizontalHeaderItem(3, QtGui.QStandardItem(u"Descripción")
+
 
         r = 0
         for row in categorias:
@@ -123,12 +125,14 @@ class Form(QtGui.QWidget):
             self.model.setData(index, row['id_categoria'])
             index = self.model.index(r, 1, QtCore.QModelIndex())
             self.model.setData(index, row['nombre'])
+
             index = self.model.index(r, 2, QtCore.QModelIndex())
             self.model.setData(index, row['descripcion'])
             r = r + 1
         self.ventana.tabla_categorias.setModel(self.model)
         self.ventana.tabla_categorias.setColumnWidth(0, 100)
         self.ventana.tabla_categorias.setColumnWidth(1, 100)
+#        self.ventana.tabla_categorias.setColumnWidth(2, 100)
         self.ventana.tabla_categorias.setColumnWidth(2, 800)
 
 
