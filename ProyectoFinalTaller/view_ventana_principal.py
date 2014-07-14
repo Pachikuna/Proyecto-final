@@ -128,6 +128,7 @@ class Form(QtGui.QWidget):
 
         r = 0
         for row in categorias:
+            cantidad = controller.contador(row[0])
             index = self.model.index(r, 0, QtCore.QModelIndex())
             self.model.setData(index, row['id_categoria'])
             index = self.model.index(r, 1, QtCore.QModelIndex())
@@ -135,7 +136,7 @@ class Form(QtGui.QWidget):
             index = self.model.index(r, 3, QtCore.QModelIndex())
             self.model.setData(index, row['descripcion'])
             index = self.model.index(r, 2, QtCore.QModelIndex())
-            self.model.setData(index, "numrecetas")
+            self.model.setData(index, cantidad)
             r = r + 1
         self.ventana.tabla_categorias.setModel(self.model)
         self.ventana.tabla_categorias.setColumnWidth(0, 100)

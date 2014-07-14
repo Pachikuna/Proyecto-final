@@ -17,6 +17,20 @@ def obtener_categorias():
     con.close()
     return cate
 
+
+def contador(codigo):
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT * FROM Recetas WHERE fk_id_categoria =?"
+    resultado = c.execute(query, [codigo])
+    result = resultado.fetchall()
+    i = 0
+    for row in result:
+        i = i+1
+    #contados = result.rowcount()
+    con.close()
+    return i
+
 def obtener_recetas():
     con = conectar()
     c = con.cursor()
