@@ -16,7 +16,6 @@ class Form(QtGui.QWidget):
         self.render_table2()
         self.cargar_categorias()
         self.cargar_recetas()
-	self.ui.tableView.clicked.connect(self.infoRecetas)
         self.ventana.nueva_categoria.clicked.connect(self.nueva_cate)
         self.ventana.editar_categoria.clicked.connect(self.editar_cate)
         self.ventana.eliminar_categoria.clicked.connect(self.eliminar_cate)
