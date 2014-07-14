@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ventana_principal.ui'
 #
-# Created: Mon Jul 14 00:00:10 2014
+# Created: Mon Jul 14 03:53:08 2014
 #      by: pyside-uic 0.2.13 running on PySide 1.1.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PySide import QtCore, QtGui
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(1009, 615)
+        Dialog.resize(1094, 615)
         Dialog.setMinimumSize(QtCore.QSize(500, 0))
         self.label = QtGui.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(20, 40, 81, 17))
@@ -72,7 +72,7 @@ class Ui_Dialog(object):
         self.nueva_receta.setGeometry(QtCore.QRect(520, 420, 121, 27))
         self.nueva_receta.setObjectName("nueva_receta")
         self.imagen = QtGui.QLabel(Dialog)
-        self.imagen.setGeometry(QtCore.QRect(780, 320, 171, 191))
+        self.imagen.setGeometry(QtCore.QRect(780, 340, 251, 181))
         self.imagen.setObjectName("imagen")
 
         self.retranslateUi(Dialog)

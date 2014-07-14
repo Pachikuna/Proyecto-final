@@ -151,7 +151,7 @@ class Form(QtGui.QWidget):
 
 
 
-    def cargarar_receta_filtro(self, productos):
+    def cargara_receta_filtro(self, productos):
         self.model = QtGui.QStandardItemModel(len(productos), 7)
         self.model.setHorizontalHeaderItem(0, QtGui.QStandardItem(u"id"))
         self.model.setHorizontalHeaderItem(1, QtGui.QStandardItem(u"Nombre"))
