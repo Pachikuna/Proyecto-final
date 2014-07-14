@@ -4,7 +4,7 @@ import sys
 from PySide import QtGui
 import controller_usuarios
 from Login import Ui_Login
-from view_ventana_principal import Form
+from qt_view import Main
 
 
 class Login(QtGui.QWidget):
