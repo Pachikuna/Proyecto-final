@@ -3,7 +3,7 @@ import sys
 import os
 from PySide import QtGui, QtCore
 import controller
-# import view_ventana_nuevareceta
+import view_ventana_nuevareceta
 import view_ventana_nuevacategoria
 from ventana_principal import *
 
@@ -22,6 +22,9 @@ class Form(QtGui.QWidget):
         self.ventana.nueva_categoria.clicked.connect(self.nueva_cate)
         self.ventana.editar_categoria.clicked.connect(self.editar_cate)
         self.ventana.eliminar_categoria.clicked.connect(self.eliminar_cate)
+        self.ventana.nueva_receta.clicked.connect(self.nueva_rece)
+        self.ventana.editar_receta.clicked.connect(self.editar_rece)
+        self.ventana.eliminar_receta.clicked.connect(self.eliminar_rece)
         #demas métodos
         self.show()
 
@@ -119,6 +122,47 @@ class Form(QtGui.QWidget):
         self.ventana.tabla_recetas.setColumnWidth(5, 800)
         self.ventana.tabla_recetas.setColumnWidth(6, 100)
 
+
+
+
+    def nueva_rece(self):
+        formulario = view_ventana_nuevareceta.Form_3(self)
+        formulario.exec_()
+
+    def eliminar_rece(self):
+        model = self.ventana.tabla_recetas.model()
+        index = self.ventana.tabla_recetas.currentIndex()
+        if index.row() == -1:  # No se ha seleccionado una fila
+            self.errorMessageDialog = QtGui.QErrorMessage(self)
+            self.errorMessageDialog.showMessage("Debe seleccionar una fila")
+            return False
+        else:
+            cod = model.index(index.row(), 0, QtCore.QModelIndex()).data()
+            print cod
+            if (controller.delete_receta(cod)):
+                self.cargar_recetas()
+                msgBox = QtGui.QMessageBox()
+                msgBox.setText("EL registro fue eliminado.")
+                msgBox.exec_()
+                return True
+            else:
+                self.errorMessageDialog = QtGui.QErrorMessage(self)
+                self.errorMessageDialog.showMessage("Error al eliminar el registro")
+                return False
+
+    def editar_rece(self):
+        model = self.ventana.tabla_recetas.model()
+        index = self.ventana.tabla_recetas.currentIndex()
+        if index.row() == -1:  # No se ha seleccionado una fila
+            self.errorMessageDialog = QtGui.QErrorMessage(self)
+            self.errorMessageDialog.showMessage("Debe seleccionar una fila")
+            return False
+        else:
+            cod = model.index(index.row(), 0, QtCore.QModelIndex()).data()
+            receta = controller.buscarEditar2(cod)
+            print receta
+            self.formulario = view_ventana_nuevareceta.Form_3(self)
+            self.formulario.carga(receta, cod)
 
 
     def cargar_categorias(self):

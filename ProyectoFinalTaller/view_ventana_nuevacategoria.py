@@ -23,24 +23,24 @@ class Form_2(QtGui.QWidget):
         self.ventana.id_categoria.setText(str(categoria[0][0]))
         self.ventana.nombre_categoria.setText(categoria[0][1])
         self.ventana.descripcion_categoria.setText(categoria[0][2])
-        var = 1
+        self.var = 1
 
 
     def aceptar(self):
         id_cate = self.ventana.id_categoria.text()
         nombre = self.ventana.nombre_categoria.text()
         descrip = self.ventana.descripcion_categoria.text()
+        var = 1
 
         datos = (id_cate, nombre, descrip)
         cod2 = self.codigo
+
         if(self.var == 1):
 
             controller.reescribeProducto(datos, cod2)
-        else:
-            controller.insertarproductos(datos)
+
         self.close()
 
 
     def cancelar(self):
         self.close()
-

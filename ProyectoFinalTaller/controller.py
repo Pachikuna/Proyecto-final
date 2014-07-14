@@ -50,6 +50,16 @@ def buscarEditar(codigo):
     con.close()
     return producto
 
+def buscarEditar2(codigo):
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT * FROM recetas WHERE id_receta = ?"
+    resultado = c.execute(query, [codigo])
+    producto = resultado.fetchall()
+    con.commit()
+    con.close()
+    return producto
+
 def obtiene_pais(pk):
     con = conectar()
     c = con.cursor()
@@ -74,11 +84,37 @@ def reescribeProducto(datos, cod2):
     c.execute(query, infonueva)
     con.commit()
 
+def reescribeProducto2(datos, cod2):
+    con = conectar()
+    c = con.cursor()
+    nom = datos[0]
+    descrip = datos[1]
+    ingre = datos[2]
+    prepa = datos[3]
+    pais = datos[4]
+    img = datos[5]
+    query = """UPDATE recetas SET nombre = ?
+            ,descripcion = ?
+            ,preparacion = ?
+            ,ingredientes = ?
+            ,imagen = ?
+            ,fk_id_pais = ?
+            WHERE id_receta = ?"""
+    infonueva = (nom, descrip, ingre, prepa, pais, img, cod2)
+    c.execute(query, infonueva)
+    con.commit()
 
 def insertarproductos(datos):
     con = conectar()
     c = con.cursor()
     query = """INSERT INTO categorias (id_categoria,nombre,descripcion) VALUES (?,?,?)"""
+    c.execute(query, datos)
+    con.commit()
+
+def insertarproductos2(datos):
+    con = conectar()
+    c = con.cursor()
+    query = """INSERT INTO recetas (nombre,descripcion,preparacion,ingredientes,imgen,fk_id_receta) VALUES (?,?,?,?,?,?)"""
     c.execute(query, datos)
     con.commit()
 
@@ -112,6 +148,21 @@ def delete(codigo):
     con = conectar()
     c = con.cursor()
     query = "DELETE FROM categorias WHERE id_categoria = ?"
+    try:
+        resultado = c.execute(query, [codigo])
+        con.commit()
+        exito = True
+    except sqlite3.Error as e:
+        exito = False
+        print "Error:", e.args[0]
+    con.close()
+    return exito
+
+def delete_receta(codigo):
+    exito = False
+    con = conectar()
+    c = con.cursor()
+    query = "DELETE FROM recetas WHERE id_receta = ?"
     try:
         resultado = c.execute(query, [codigo])
         con.commit()
