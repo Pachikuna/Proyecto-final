@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>854</width>
+    <width>1009</width>
     <height>615</height>
    </rect>
   </property>
@@ -61,6 +61,9 @@
    </property>
    <property name="autoScroll">
     <bool>false</bool>
+   </property>
+   <property name="dragEnabled">
+    <bool>true</bool>
    </property>
    <property name="selectionMode">
     <enum>QAbstractItemView::SingleSelection</enum>

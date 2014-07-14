@@ -26,6 +26,16 @@ def obtener_recetas():
     con.close()
     return recetas
 
+def buscarEditar(codigo):
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT * FROM categorias WHERE id_categoria = ?"
+    resultado = c.execute(query, [codigo])
+    producto = resultado.fetchall()
+    con.commit()
+    con.close()
+    return producto
+
 def obtiene_pais(pk):
     con = conectar()
     c = con.cursor()
@@ -35,3 +45,41 @@ def obtiene_pais(pk):
     con.commit()
     con.close()
     return producto
+
+def reescribeProducto(datos, cod2):
+    con = conectar()
+    c = con.cursor()
+    id_cate = datos[0]
+    nom = datos[1]
+    descrip = datos[2]
+    query = """UPDATE categorias SET id_categoria = ?
+            ,nombre = ?
+            ,descripcion = ?
+            WHERE id_categoria = ?"""
+    infonueva = (id_cate, nom, descrip, cod2)
+    c.execute(query, infonueva)
+    con.commit()
+
+
+def insertarproductos(datos):
+    con = conectar()
+    c = con.cursor()
+    query = """INSERT INTO categorias (id_categoria,nombre,descripcion) VALUES (?,?,?)"""
+    c.execute(query, datos)
+    con.commit()
+
+
+def delete(codigo):
+    exito = False
+    con = conectar()
+    c = con.cursor()
+    query = "DELETE FROM categorias WHERE id_categoria = ?"
+    try:
+        resultado = c.execute(query, [codigo])
+        con.commit()
+        exito = True
+    except sqlite3.Error as e:
+        exito = False
+        print "Error:", e.args[0]
+    con.close()
+    return exito

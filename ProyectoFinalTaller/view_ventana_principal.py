@@ -3,7 +3,7 @@ import sys
 from PySide import QtGui, QtCore
 import controller
 # import view_ventana_nuevareceta
-# import view_ventana_nuevacategoria
+import view_ventana_nuevacategoria
 from ventana_principal import *
 
 
@@ -16,6 +16,9 @@ class Form(QtGui.QWidget):
         self.render_table2()
         self.cargar_categorias()
         self.cargar_recetas()
+        self.ventana.nueva_categoria.clicked.connect(self.nueva_cate)
+        self.ventana.editar_categoria.clicked.connect(self.editar_cate)
+        self.ventana.eliminar_categoria.clicked.connect(self.eliminar_cate)
         #demas métodos
         self.show()
 
@@ -25,6 +28,45 @@ class Form(QtGui.QWidget):
         self.ventana.tabla_categorias.adjustSize()
         self.ventana.tabla_categorias.setFixedWidth(600)
         self.ventana.tabla_categorias.setFixedHeight(200)
+
+
+    def editar_cate(self):
+        model = self.ventana.tabla_categorias.model()
+        index = self.ventana.tabla_categorias.currentIndex()
+        if index.row() == -1:  # No se ha seleccionado una fila
+            self.errorMessageDialog = QtGui.QErrorMessage(self)
+            self.errorMessageDialog.showMessage("Debe seleccionar una fila")
+            return False
+        else:
+            cod = model.index(index.row(), 0, QtCore.QModelIndex()).data()
+            categoria = controller.buscarEditar(cod)
+            self.formulario = view_ventana_nuevacategoria.Form_2(self)
+            self.formulario.carga(categoria, cod)
+
+
+    def nueva_cate(self):
+        formulario = view_ventana_nuevacategoria.Form_2(self)
+        formulario.exec_()
+
+    def eliminar_cate(self):
+        model = self.ventana.tabla_categorias.model()
+        index = self.ventana.tabla_categorias.currentIndex()
+        if index.row() == -1:  # No se ha seleccionado una fila
+            self.errorMessageDialog = QtGui.QErrorMessage(self)
+            self.errorMessageDialog.showMessage("Debe seleccionar una fila")
+            return False
+        else:
+            cod = model.index(index.row(), 0, QtCore.QModelIndex()).data()
+            if (controller.delete(cod)):
+                self.cargar_categorias()
+                msgBox = QtGui.QMessageBox()
+                msgBox.setText("EL registro fue eliminado.")
+                msgBox.exec_()
+                return True
+            else:
+                self.ui.errorMessageDialog = QtGui.QErrorMessage(self)
+                self.ui.errorMessageDialog.showMessage("Error al eliminar el registro")
+                return False
 
     def render_table2(self):
         self.ventana.tabla_recetas.setSelectionBehavior(
@@ -70,20 +112,24 @@ class Form(QtGui.QWidget):
 
     def cargar_categorias(self):
         categorias = controller.obtener_categorias()
-        self.model = QtGui.QStandardItemModel(len(categorias), 2)
-        self.model.setHorizontalHeaderItem(0, QtGui.QStandardItem(u"Nombre"))
-        self.model.setHorizontalHeaderItem(1, QtGui.QStandardItem(u"Descripción"))
+        self.model = QtGui.QStandardItemModel(len(categorias), 3)
+        self.model.setHorizontalHeaderItem(0, QtGui.QStandardItem(u"id"))
+        self.model.setHorizontalHeaderItem(1, QtGui.QStandardItem(u"Nombre"))
+        self.model.setHorizontalHeaderItem(2, QtGui.QStandardItem(u"Descripción"))
 
         r = 0
         for row in categorias:
             index = self.model.index(r, 0, QtCore.QModelIndex())
-            self.model.setData(index, row['nombre'])
+            self.model.setData(index, row['id_categoria'])
             index = self.model.index(r, 1, QtCore.QModelIndex())
+            self.model.setData(index, row['nombre'])
+            index = self.model.index(r, 2, QtCore.QModelIndex())
             self.model.setData(index, row['descripcion'])
             r = r + 1
         self.ventana.tabla_categorias.setModel(self.model)
-        self.ventana.tabla_categorias.setColumnWidth(0, 150)
-        self.ventana.tabla_categorias.setColumnWidth(1, 800)
+        self.ventana.tabla_categorias.setColumnWidth(0, 100)
+        self.ventana.tabla_categorias.setColumnWidth(1, 100)
+        self.ventana.tabla_categorias.setColumnWidth(2, 800)
 
 
 
