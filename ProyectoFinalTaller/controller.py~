@@ -68,19 +68,6 @@ def insertarproductos(datos):
     c.execute(query, datos)
     con.commit()
 
-def infoFila2(codigo):
-    """Funcion que retorna la informacion de una fila
-    @return valores"""
-    con = conectar()
-    c = con.cursor()
-    query = "SELECT * FROM recetas WHERE id=?"
-    resultado = c.execute(query, [codigo])
-    infoFila = resultado.fetchall()
-    con.close()
-    for row in infoFila:
-        valores = [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]]
-    return valores
-
 
 def delete(codigo):
     exito = False

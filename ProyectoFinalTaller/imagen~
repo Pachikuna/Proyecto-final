@@ -1,0 +1,56 @@
+controller:
+def infoFila(codigo):
+    """Funcion que retorna la informacion de una fila
+    @return valores"""
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT * FROM movies WHERE id=?"
+    resultado = c.execute(query, [codigo])
+    infoFila = resultado.fetchall()
+    con.close()
+    for row in infoFila:
+        valores = [row[1], row[2], row[3], row[4], row[5], row[6], row[7],row[8]]
+    return valores
+
+def infoFila2(codigo):
+    """Funcion que retorna la informacion de una fila
+    @return valores"""
+    con = conectar()
+    c = con.cursor()
+    query = "SELECT * FROM movies WHERE id=?"
+    resultado = c.execute(query, [codigo])
+    infoFila = resultado.fetchall()
+    con.close()
+    for row in infoFila:
+        valores = [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7],row[8]]
+    return valores
+
+
+
+main:
+
+self.ui.tableView.clicked.connect(self.infoMovies)
+
+
+
+
+def infoMovies(self):
+        model = self.ui.tableView.model()
+        index = self.ui.tableView.currentIndex()
+        codigo = model.index(index.row(), 3, QtCore.QModelIndex()).data()
+        valores = controller.infoFila2(codigo)
+
+        self.ui.titulo.setText(valores[1])
+        ficheros = os.listdir('Img/')
+        fichero = valores[6] in ficheros
+        if fichero is True:
+            direccion = 'Img/{0}'.format(valores[6])
+            self.ui.setImageLabel(direccion)
+        else:
+            fichero = valores[6] + ".png" in ficheros
+            if fichero is True:
+                direccion = 'Img/{0}'.format(valores[6])
+                self.ui.setImageLabel(direccion)
+
+
+
